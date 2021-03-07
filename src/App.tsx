@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
+  const login = async () => {
+    await fetch("/login", { method: "POST" });
+    alert("ログインしました");
+  };
+
+  const getUser = async () => {
+    const res = await fetch("/user", {
+      headers: { "content-type": "application/json" },
+    });
+
+    const user = await res.json();
+    alert(JSON.stringify(user));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={login}>ログイン</button>
+      <button onClick={getUser}>ユーザー取得</button>
     </div>
   );
 }
